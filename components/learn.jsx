@@ -79,8 +79,11 @@ export default function Learn({ reset }) {
     <div>
       {/* show back button to navigate back to original state */}
       <div className="py-4">
-        <span className="inline-flex items-center">
-          <ArrowLeftCircleIcon className="h-6 w-6" onClick={reset} />
+        <span
+          className="inline-flex items-center hover:cursor-pointer"
+          onClick={reset}
+        >
+          <ArrowLeftCircleIcon className="h-6 w-6" />
           <p className="pl-2">Main</p>
         </span>
       </div>
