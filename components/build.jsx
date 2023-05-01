@@ -1,13 +1,15 @@
 import { ArrowLeftCircleIcon } from '@heroicons/react/20/solid';
 import { project } from '@/utils/roadmap';
+import { useRouter } from 'next/router';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function Build({ reset }) {
+  const router = useRouter();
   return (
-    <div>
+    <div className="px-6 py-8 lg:px-8">
       {/* show back button to navigate back to original state */}
       <div className="py-4">
         <span
@@ -15,7 +17,7 @@ export default function Build({ reset }) {
           onClick={reset}
         >
           <ArrowLeftCircleIcon className="h-6 w-6" />
-          <p className="pl-2">Main</p>
+          <p className="pl-2">Back</p>
         </span>
       </div>
       <div className="flex justify-center">
@@ -23,7 +25,11 @@ export default function Build({ reset }) {
           <div className="flow-root">
             <ul role="list" className="-mb-8">
               {project.map((event, eventIdx) => (
-                <li key={event.id}>
+                <li
+                  key={event.id}
+                  className="hover:cursor-pointer"
+                  onClick={() => router.push(`/build/${event.slug}`)}
+                >
                   <div className="relative pb-8">
                     {eventIdx !== project.length - 1 ? (
                       <span

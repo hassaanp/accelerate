@@ -1,12 +1,15 @@
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
+import { useRouter } from 'next/router';
 
 const projects = [
   {
     name: 'Learn the Core',
     initials: 'LEARN',
     href: '#',
-    members: 16,
+    members: 10,
     bgColor: 'bg-pink-600',
+    slug: 'core',
+    completed: true,
   },
   {
     name: 'Build a Project',
@@ -14,6 +17,8 @@ const projects = [
     href: '#',
     members: 12,
     bgColor: 'bg-purple-600',
+    slug: 'project',
+    completed: false,
   },
   {
     name: 'Contribute to Opensource',
@@ -21,6 +26,8 @@ const projects = [
     href: '#',
     members: 16,
     bgColor: 'bg-yellow-500',
+    slug: 'opensource',
+    completed: false,
   },
 ];
 
@@ -28,7 +35,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function SelectCourse({ user, setCourse }) {
+export default function SelectCourse() {
+  const router = useRouter();
   return (
     <div>
       <h2 className="text-sm font-medium text-gray-500">Curriculum</h2>
@@ -39,9 +47,10 @@ export default function SelectCourse({ user, setCourse }) {
         {projects.map((project) => (
           <li
             key={project.name}
-            className="hover:cursor-pointer col-span-1 flex rounded-md shadow-sm"
+            className="relative hover:cursor-pointer col-span-1 flex rounded-md shadow-sm"
             onClick={() => {
-              setCourse(project.initials);
+              // setCourse(project.initials);
+              router.push(`/${project.slug}`);
             }}
           >
             <div
@@ -62,6 +71,11 @@ export default function SelectCourse({ user, setCourse }) {
                 </a>
                 <p className="text-gray-500">{project.members} Modules</p>
               </div>
+              {!project.completed && (
+                <span className="absolute bottom-0 left-0 inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                  Under construction
+                </span>
+              )}
               <div className="flex-shrink-0 pr-2">
                 <button
                   type="button"

@@ -7,7 +7,7 @@ function classNames(...classes) {
 
 export default function Work({ reset }) {
   return (
-    <div>
+    <div className="px-6 py-8 lg:px-8">
       {/* show back button to navigate back to original state */}
       <div className="py-4">
         <span
